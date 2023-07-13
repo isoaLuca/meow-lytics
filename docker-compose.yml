@@ -19,6 +19,8 @@ services:
       - db
     environment:
       DATABASE_URL: postgresql://CatMaster:miaou12@db:5432/dbpaw
+    entrypoint: ["/bin/sh", "/usr/src/app/startup.sh"]
+
     volumes:
       - ./server:/usr/src/app
     command: npm run dev
