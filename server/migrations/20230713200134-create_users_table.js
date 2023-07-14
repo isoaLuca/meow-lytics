@@ -37,6 +37,15 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         unique: true,
       },
+      APP_SECRET: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      isAdminApproved: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
