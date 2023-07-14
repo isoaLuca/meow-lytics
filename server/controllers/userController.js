@@ -32,6 +32,31 @@ const registerUser = async (req, res) => {
   }
 };
 
+const loginUser = async (req, res, next) => {
+  try {
+    const { email, APP_SECRET } = req.body;
+
+    const user = await User.findOne({ where: { email, APP_SECRET } });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "L'Email ou l'APP_SECRET est faux." });
+    }
+
+    res.json({
+      message: "Your IN ! Got'cha bro !",
+      user: {
+        APP_ID: user.APP_ID,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Aïe.. That's called a fail man..." });
+  }
+};
+
 module.exports = {
   registerUser,
+  loginUser,
 };
