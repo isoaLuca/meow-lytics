@@ -2,11 +2,19 @@ const User = require("../models/User");
 
 const registerUser = async (req, res) => {
   try {
-    const { companyName, firstName, lastName, email, phoneNumber, baseURL } =
-      req.body;
+    const {
+      companyName,
+      KBIS,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      baseURL,
+    } = req.body;
 
     const newUser = await User.create({
       companyName,
+      KBIS,
       firstName,
       lastName,
       email,
