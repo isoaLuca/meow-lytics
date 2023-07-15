@@ -35,7 +35,13 @@
       }
     }
 
-    return null;
+    if (userId === null) {
+      userId = generateRandomUserId();
+      document.cookie = "userId=" + userId + "; max-age=31536000";
+      trackEvent("new_visitor", {});
+    }
+
+    return userId;
   }
 
   trackEvent("pageview", {
