@@ -44,6 +44,18 @@
     return userId;
   }
 
+  function trackTag(tagId) {
+    trackEvent("tag", { tagId });
+  }
+
+  const tags = document.getElementsByTagName("meow-tag");
+  for (let i = 0; i < tags.length; i++) {
+    const tagId = tags[i].getAttribute("data-id");
+    if (tagId) {
+      trackTag(tagId);
+    }
+  }
+
   trackEvent("pageview", {
     url: window.location.href,
     title: document.title,
