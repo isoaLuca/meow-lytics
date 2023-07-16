@@ -5,7 +5,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import EmailVerification from "./components/auth/emailConfirmationPage";
 import Dashboard from "./components/home/dashboard";
-// import ProtectedRoute from "./components/security/captainAmerica";
+import ProtectedRoute from "./components/security/captainAmerica";
 
 function App() {
   return (
@@ -16,7 +16,14 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/email-verification" element={<EmailVerification />} />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>

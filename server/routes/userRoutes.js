@@ -15,19 +15,23 @@ router.get(
 router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 
-router.post("/dashboard/new-tag", async (req, res) => {
-  const { comment } = req.body;
-  if (!comment || comment.trim() === "") {
-    return res.status(400).json({ error: "Le commentaire est obligatoire!" });
-  }
+router.post(
+  "/dashboard/new-tag",
+  passport.authenticate("local", { session: false }),
+  async (req, res) => {
+    const { comment } = req.body;
+    if (!comment || comment.trim() === "") {
+      return res.status(400).json({ error: "Le commentaire est obligatoire!" });
+    }
 
-  try {
-    const newTag = await Tag.create({ comment });
-    res.status(201).json(newTag);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Erreur pendant la création du tag" });
+    try {
+      const newTag = await Tag.create({ comment });
+      res.status(201).json(newTag);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Erreur pendant la création du tag" });
+    }
   }
-});
+);
 
 module.exports = router;

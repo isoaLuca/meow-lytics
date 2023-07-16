@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const Login = () => {
         email,
         APP_SECRET: appSecret,
       });
-
+      Cookies.set("appID", response.data.appID);
       navigate("/dashboard");
     } catch (error) {
       console.error(error);

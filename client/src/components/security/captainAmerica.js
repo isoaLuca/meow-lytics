@@ -1,14 +1,15 @@
-import { Navigate, Route } from "react-router-dom";
+import { Navigate, Route, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
-function ProtectedRoute({ element, ...rest }) {
-  const token = Cookies.get("token");
+function ProtectedRoute({ children }) {
+  // const location = useLocation();
+  const appID = Cookies.get("appID");
 
-  return token ? (
-    <Route {...rest} element={element} />
-  ) : (
-    <Navigate to="/login" replace />
-  );
+  if (appID) {
+    return children;
+  } else {
+    return <Navigate to="/login" />;
+  }
 }
 
 export default ProtectedRoute;
